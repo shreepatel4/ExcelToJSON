@@ -7,17 +7,19 @@ wb = xlrd.open_workbook('Bell mapping.xlsx')
 sh = wb.sheet_by_index(0)
 
 # List to hold dictionaries
+result = {}
+result['SubContract'] = []
 subcontracts = []
 
 # Iterate through each row in worksheet and fetch values into dict
-for rownum in range(5):
-    updatedSubcontracts = OrderedDict()
+for rownum in range(1, sh.nrows):
+    updatedSubcontracts = dict()
     row_values = sh.row_values(rownum)
     vendor = row_values[3]
     vendor = vendor.strip()
     updatedSubcontracts['VendorId'] = vendor
     contractNumber = str(row_values[19])
-    contractNumber = contractNumber.strip
+    contractNumber = contractNumber.strip()
     #contractNumber = contractNumber[0:-2]
     updatedSubcontracts['ContractNumber'] = contractNumber
     jobNumber = str(row_values[27])
@@ -45,13 +47,13 @@ for rownum in range(5):
         segmentTwo =row_values[73]
     updatedSubcontracts['ComponentDescription'] = segmentTwo
 
-    subcontracts.append(updatedSubcontracts)
-    #Serialize the list of dicts to JSON
-#result = {}
-#result['SubContract']=subcontracts
-    j = json.dumps(subcontracts)
+    result.get('SubContract').append(updatedSubcontracts)
 
-    # Write to file
-    with open('data.json', 'w') as f:
-        f.write(j)
+#Serialize the list of dicts to JSON
+print(result)
+j = json.dumps(result)
+
+# Write to file
+with open('data.json', 'w') as f:
+    f.write(j)
 
