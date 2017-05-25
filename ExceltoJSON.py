@@ -13,7 +13,7 @@ subcontracts = []
 
 # Iterate through each row in worksheet and fetch values into dict
 for rownum in range(1, sh.nrows):
-    updatedSubcontracts = dict()
+    updatedSubcontracts = OrderedDict()
     row_values = sh.row_values(rownum)
     vendor = row_values[3]
     vendor = vendor.strip()
