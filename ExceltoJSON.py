@@ -29,13 +29,7 @@ for rownum in range(1, sh.nrows):
     firstpart = firstpart.strip()
     firstpart = firstpart[0:-2]
     secondpart = row_values[0]
-    #if secondpart == float(secondpart):
-    #    secondpart = str(int(secondpart))
-    #else:
-    #    secondpart = str(secondpart)
-    #print (secondpart)
-    #subcontractstring = firstpart + '-' + secondpart
-    #updatedSubcontracts['SubcontractItemNumber'] = subcontractstring
+    updatedSubcontracts['SubcontractItemNumber'] = firstpart + '-' + str(int(secondpart))
 
     #componentdescription "Unit # : + segmentTwo if it isn't null, else use the category description
     segmentTwo = str(row_values[43])
